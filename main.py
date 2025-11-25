@@ -7,13 +7,10 @@ class EchoPlugin(Star):
         super().__init__(context)
 
     @filter.command("echo")
-    async def echo(self, event: AstrMessageEvent):
-        """原样返回用户文字消息链."""
-        
-        # 返回 `/echo` 之后的文字内容
-        remainder = event.message_str[len("/echo"):].lstrip()
+    async def echo(self, event: AstrMessageEvent, message: str = ""):
+        """原样返回用户文字消息"""
 
-        if remainder:
-            yield event.plain_result(remainder)
+        if message:
+            yield event.plain_result(message)
         else:
             yield event.plain_result("PONG")
